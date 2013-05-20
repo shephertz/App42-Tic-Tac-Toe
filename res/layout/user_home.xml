@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/game_background"
+    android:layout_height="fill_parent">
+
+    <LinearLayout        
+        android:id="@+id/UserHome_Panel"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profile_pic"                              
+            android:layout_width="0dip"
+            android:layout_height="50dp"   
+            android:src="@drawable/default_profile"
+            android:onClick="onProfileClicked"
+            android:layout_marginTop="5dp"         
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/Signout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip"
+            android:layout_gravity="center_vertical"
+            android:state_enabled="false"
+            android:onClick="onSignOutClicked"
+            android:text="@string/sign_out_button" />
+        <ImageButton
+            android:id="@+id/Reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="5dip"
+            android:layout_gravity="center_vertical"
+            android:state_enabled="false"
+            android:onClick="onReloadClicked"
+            android:src="@drawable/list_refresh" />                        
+    </LinearLayout>
+        
+    <ListView
+		    android:id="@id/android:list"    
+		    android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:layout_marginTop="5dp"
+		    android:layout_marginBottom="7dp"
+		    android:layout_marginRight="10dp"
+		     android:layout_marginLeft="10dp"
+	        android:minHeight="100dp"		
+	        android:layout_weight="1"    		    	        
+		    android:listSelector="@android:color/transparent"
+		    android:cacheColorHint="@android:color/transparent" />    
+    <LinearLayout        
+        android:id="@+id/NewGame_CompositionPanel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/opp_name"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:hint="@string/opponent_input"
+            android:inputType="text"            
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="5dp"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_gravity="center_vertical"
+            android:state_enabled="false"
+            android:onClick="onStartGameClicked"
+            android:text="@string/create_game_button" />
+    </LinearLayout>    
+</LinearLayout>

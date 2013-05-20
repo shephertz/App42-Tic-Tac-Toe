@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email (required if registering)</string>
+    <string name="app_name">App42TicTacToe</string>
+    <string name="signin_button">Sign in</string>
+    <string name="register_button">Register now</string>
+    <string name="opponent_input">Friend name</string>
+    <string name="create_game_button">Start Game</string>
+    <string name="welcome">TicTacToe welcomes you</string>
+    <string name="sign_out_button">Signout</string>
+    <string name="submit_button">Submit</string>
+	<string name="reload_button">Reload games</string>
+	<string name="rematch_button">Play again</string>
+	 <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
+    <string name="gcm_message">From GCM: you got message!</string>
+    <string name="gcm_error">From GCM: error (%1$s).</string>
+       <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
+	  <string name="error_config">Please set the %1$s constant and recompile the app.</string>	
+</resources>

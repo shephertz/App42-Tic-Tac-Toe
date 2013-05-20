@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/game_background"
+    android:layout_height="fill_parent">
+  <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:layout_height="fill_parent">
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+           android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/lines"
+       android:layout_gravity="center">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+         >
+
+           <ImageButton
+            android:id="@+id/cell_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:src="@drawable/empty_cell"
+            android:onClick="onCellClicked" />        
+        <ImageButton
+            android:id="@+id/cell_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:src="@drawable/empty_cell"
+            android:onClick="onCellClicked"/>
+        <ImageButton
+            android:id="@+id/cell_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:src="@drawable/empty_cell"
+            android:onClick="onCellClicked"/>    
+        </TableRow>
+            <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tableRow1"
+            android:layout_alignParentLeft="true"
+               android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+             >
+
+             <ImageButton
+            android:id="@+id/cell_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:src="@drawable/empty_cell"
+            android:onClick="onCellClicked"/>
+        <ImageButton
+            android:id="@+id/cell_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent" 
+            android:state_enabled="false"
+            android:onClick="onCellClicked"
+            android:src="@drawable/empty_cell" />
+        <ImageButton
+            android:id="@+id/cell_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:onClick="onCellClicked"
+            android:src="@drawable/empty_cell" />          
+        </TableRow>
+            <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tableRow2"
+            android:layout_alignParentLeft="true"
+               android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            >
+
+             <ImageButton
+            android:id="@+id/cell_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:onClick="onCellClicked"
+            android:src="@drawable/empty_cell" />
+        <ImageButton
+            android:id="@+id/cell_21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:onClick="onCellClicked"
+            android:src="@drawable/empty_cell" />
+        <ImageButton
+            android:id="@+id/cell_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:background="@android:color/transparent"
+            android:state_enabled="false"
+            android:onClick="onCellClicked"
+            android:src="@drawable/empty_cell" />     
+        </TableRow>
+         </TableLayout>
+	<Button
+	    android:id="@+id/submit"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"	   
+	    android:layout_marginTop="20dp" 
+	    android:onClick="onSubmitClicked"
+	    android:text="@string/submit_button" />    
+
+    <LinearLayout               
+       android:layout_width="fill_parent"
+       android:gravity="center"
+       android:layout_marginBottom="20dp"
+       android:layout_height="wrap_content">
+	    <TextView
+	        android:id="@+id/status"
+	        android:maxLines="1"
+	        android:textSize="25sp"           
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold"      
+	        android:layout_gravity="center"  
+	        android:layout_marginLeft="5dp"                          
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"      
+	        android:text="enjoy the game." />
+	    		    
+		<Button
+		    android:id="@+id/rematch"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"	    
+		    android:layout_marginLeft="20dp"
+		    android:onClick="onRematchClicked"
+		    
+		    android:text="@string/rematch_button" />
+	</LinearLayout>   
+	</LinearLayout>   
+	</ScrollView>
+</LinearLayout>
