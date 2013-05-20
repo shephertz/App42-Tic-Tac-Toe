@@ -23,3 +23,15 @@ ere are the few easy steps to run this sample app.
 
 
 # Design Details:
+
+__Initialize Services:__
+
+Initialization has been done in AsyncApp42ServiceApi.java
+
+```
+     ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
+  			Constants.App42ApiSecret);
+		this.userService = sp.buildUserService();
+		this.storageService = sp.buildStorageService();
+		this.pushService = sp.buildPushNotificationService();
+```
