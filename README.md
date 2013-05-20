@@ -101,7 +101,7 @@ Device Registration is done in MainActivty.java
 __Create Game:__ While starting a new game with opponent you have to create a game.
  Game creation has been done in in AsyncApp42ServiceApi.java
 ```
-                   final JSONObject gameObject = new JSONObject();
+                     final JSONObject gameObject = new JSONObject();
 					gameObject.put(Constants.GameFirstUserKey, uname1);
 					gameObject.put(Constants.GameSecondUserKey, remoteUserName);
 					gameObject.put(Constants.GameStateKey,
@@ -126,7 +126,7 @@ __Create Game:__ While starting a new game with opponent you have to create a ga
 __Update Game:__ While playing game.
  Game updation has been done in in AsyncApp42ServiceApi.java
 ```
-                  final JSONObject gameObject = new JSONObject();
+                    final JSONObject gameObject = new JSONObject();
 					gameObject.put(Constants.GameFirstUserKey, uname1);
 					gameObject.put(Constants.GameSecondUserKey, remoteUserName);
 					gameObject.put(Constants.GameStateKey,
