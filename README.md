@@ -1,6 +1,12 @@
 App42-Tic-Tac-Toe
 ===========================
 
+# About Game
+
+1. Its a multiplayer turn based game.
+2. The winning motive of game is to connect three cross or circle first.
+3. Once you have played your turn , a notification message is sent to opponent user with game information.
+
 # Runnnig Sample
 
 This is a sample Android gaming app is made by using App42 backened platform. It uses user, storage ,pushNotification and gaming APIs of App42 platform. 
