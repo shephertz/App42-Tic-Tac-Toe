@@ -36,8 +36,40 @@ Initialization has been done in AsyncApp42ServiceApi.java
 		this.pushService = sp.buildPushNotificationService();
 ```
 
-__Create User:__ While Loging in game.
+__Register User:__ While first time registering in game.
 
 ```
               User user = userService.createUser(name, pswd, email);
+```
+__Authenticate User:__ After logout loging again.
+
+```
+             App42Response response = userService.authenticate(
+							name, pswd);
+```
+
+__Create Game:__ While starting a new game with opponent you have to firt create game.
+
+
+```
+                                final JSONObject gameObject = new JSONObject();
+					gameObject.put(Constants.GameFirstUserKey, uname1);
+					gameObject.put(Constants.GameSecondUserKey, remoteUserName);
+					gameObject.put(Constants.GameStateKey,
+							Constants.GameStateIdle);
+					gameObject.put(Constants.GameBoardKey,
+							Constants.GameIdleState);
+					gameObject.put(Constants.GameWinnerKey, "");
+					gameObject.put(Constants.GameNextMoveKey, uname1);
+					gameObject.put(Constants.GameIdKey, java.util.UUID
+							.randomUUID().toString());
+
+					// Insert in to user1's game collection
+					storageService.insertJSONDocument(Constants.App42DBName,
+							Constants.App42UserGamesCollectionPrefix + uname1,
+							gameObject.toString());
+					// Insert in to user2's game collection
+					storageService.insertJSONDocument(Constants.App42DBName,
+							Constants.App42UserGamesCollectionPrefix
+									+ remoteUserName, gameObject.toString());
 ```
