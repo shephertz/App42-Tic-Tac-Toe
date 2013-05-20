@@ -3,8 +3,8 @@ App42-Tic-Tac-Toe
 
 # About Game
 
-1. Its a multiplayer turn based game.
-2. The winning motive of game is to connect three cross or circle first.
+1. Its a multi-player turn based game.
+2. The winning motive of the game is to connect three respective cross or circle in a vertical ,horizontal or digonal direction.
 3. Once you have played your turn , a notification message is sent to opponent user with game information.
 
 # Runnnig Sample
