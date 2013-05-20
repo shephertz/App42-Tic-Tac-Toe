@@ -37,22 +37,65 @@ Initialization has been done in AsyncApp42ServiceApi.java
 ```
 
 __Register User:__ While first time registering in game.
+ User registeration has been done in in AsyncApp42ServiceApi.java
 
 ```
               User user = userService.createUser(name, pswd, email);
 ```
 __Authenticate User:__ After logout loging again.
+ User Authenticatation has been done in in AsyncApp42ServiceApi.java
 
 ```
              App42Response response = userService.authenticate(
 							name, pswd);
 ```
+__Push Service registeration :__ To get Push notification you have register your device on APP42 using PushNotificationService.
 
-__Create Game:__ While starting a new game with opponent you have to firt create game.
-
+Device Registration is done in MainActivty.java
 
 ```
-                                final JSONObject gameObject = new JSONObject();
+           public void doRegistration(Context context, final String userID) {
+			this.context = context;
+			GCMRegistrar.checkDevice(context);
+			GCMRegistrar.checkManifest(context);
+			final String deviceId = GCMRegistrar.getRegistrationId(context);
+			if (deviceId.equals("")) {
+			//Sender Id is equals to our projectNo generated on Google Api console. 
+				GCMRegistrar.register(MainActivity.this, Constants.SENDER_ID);
+			} else {
+				mRegisterTask = new AsyncTask<Void, Void, Void>() {
+					@Override
+					protected Void doInBackground(Void... params) {
+						try {
+							ServiceAPI sp = new ServiceAPI(
+									Constants.App42ApiKey,
+									Constants.App42ApiSecret);
+							String userName = Constants.GameName + userID;
+							PushNotificationService push = sp
+									.buildPushNotificationService();
+							push.storeDeviceToken(userName, deviceId);
+						} catch (Exception e) {
+						}
+						return null;
+					}
+
+					@Override
+					protected void onPostExecute(Void result) {
+						mRegisterTask = null;
+
+					}
+
+				};
+				mRegisterTask.execute(null, null, null);
+			}
+		}
+```
+
+
+__Create Game:__ While starting a new game with opponent you have to firt create game.
+ Game creation has been done in in AsyncApp42ServiceApi.java
+```
+                      final JSONObject gameObject = new JSONObject();
 					gameObject.put(Constants.GameFirstUserKey, uname1);
 					gameObject.put(Constants.GameSecondUserKey, remoteUserName);
 					gameObject.put(Constants.GameStateKey,
@@ -72,4 +115,37 @@ __Create Game:__ While starting a new game with opponent you have to firt create
 					storageService.insertJSONDocument(Constants.App42DBName,
 							Constants.App42UserGamesCollectionPrefix
 									+ remoteUserName, gameObject.toString());
+```
+
+__Update Game:__ While playing game.
+ Game updation has been done in in AsyncApp42ServiceApi.java
+```
+                      final JSONObject gameObject = new JSONObject();
+					gameObject.put(Constants.GameFirstUserKey, uname1);
+					gameObject.put(Constants.GameSecondUserKey, remoteUserName);
+					gameObject.put(Constants.GameStateKey,
+							Constants.GameStateIdle);
+					gameObject.put(Constants.GameBoardKey,
+							Constants.GameIdleState);
+					gameObject.put(Constants.GameWinnerKey, "");
+					gameObject.put(Constants.GameNextMoveKey, uname1);
+					gameObject.put(Constants.GameIdKey, java.util.UUID
+							.randomUUID().toString());
+
+					// Insert in to user1's game collection
+					storageService.insertJSONDocument(Constants.App42DBName,
+							Constants.App42UserGamesCollectionPrefix + uname1,
+							gameObject.toString());
+					// Insert in to user2's game collection
+					storageService.insertJSONDocument(Constants.App42DBName,
+							Constants.App42UserGamesCollectionPrefix
+									+ remoteUserName, gameObject.toString());
+```
+
+__Push meassge:__ Once you have played your turn , you have to send notification to your opponent
+ Push message has been sent in in AsyncApp42ServiceApi.java
+
+```
+            	pushService.sendPushMessageToUser(Constants.GameName
+							+ userName, newGameObj.toString());
 ```
