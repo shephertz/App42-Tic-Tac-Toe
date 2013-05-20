@@ -6,10 +6,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,7 +45,7 @@ public class MainActivity extends Activity implements
 		asyncService = AsyncApp42ServiceApi.instance();
 		String loggedInName = mPrefs.getString(Constants.SharedPrefUname, null);
 		if (loggedInName != null && !loggedInName.isEmpty()) {
-		
+
 			gotoHomeActivity(loggedInName);
 		}
 	}
@@ -146,9 +144,9 @@ public class MainActivity extends Activity implements
 		if (mRegisterTask != null) {
 			mRegisterTask.cancel(true);
 		}
-	//	unregisterReceiver(mHandleMessageReceiver);
+		// unregisterReceiver(mHandleMessageReceiver);
 		GCMRegistrar.onDestroy(this);
-	
+
 	}
 
 	private class PushRegistration {
@@ -158,8 +156,8 @@ public class MainActivity extends Activity implements
 			this.context = context;
 			GCMRegistrar.checkDevice(context);
 			GCMRegistrar.checkManifest(context);
-			//registerReceiver(mHandleMessageReceiver, new IntentFilter(
-			//		Constants.DISPLAY_MESSAGE_ACTION));
+			// registerReceiver(mHandleMessageReceiver, new IntentFilter(
+			// Constants.DISPLAY_MESSAGE_ACTION));
 			final String deviceId = GCMRegistrar.getRegistrationId(context);
 			if (deviceId.equals("")) {
 				GCMRegistrar.register(MainActivity.this, Constants.SENDER_ID);
