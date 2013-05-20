@@ -29,9 +29,15 @@ __Initialize Services:__
 Initialization has been done in AsyncApp42ServiceApi.java
 
 ```
-     ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
+                ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
   			Constants.App42ApiSecret);
 		this.userService = sp.buildUserService();
 		this.storageService = sp.buildStorageService();
 		this.pushService = sp.buildPushNotificationService();
+```
+
+__Create User:__ While Loging in game.
+
+```
+              User user = userService.createUser(name, pswd, email);
 ```
