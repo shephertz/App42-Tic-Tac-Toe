@@ -42,7 +42,7 @@ __Register User:__ First register yourself to play game.
 ```
               User user = userService.createUser(name, pswd, email);
 ```
-__Authenticate User:__ If you alredy regitered with App42 than authenticate .
+__Authenticate User:__ If you alredy registered with App42 than authentication is required .
  User Authenticatation has been done in in AsyncApp42ServiceApi.java
 
 ```
@@ -92,7 +92,7 @@ Device Registration is done in MainActivty.java
 ```
 
 
-__Create Game:__ While starting a new game with opponent you have to firt create game.
+__Create Game:__ While starting a new game with opponent you have to create a game.
  Game creation has been done in in AsyncApp42ServiceApi.java
 ```
                       final JSONObject gameObject = new JSONObject();
