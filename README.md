@@ -35,7 +35,7 @@ __Initialize Services:__
 Initialization has been done in AsyncApp42ServiceApi.java
 
 ```
-             ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
+           ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
   			Constants.App42ApiSecret);
 		this.userService = sp.buildUserService();
 		this.storageService = sp.buildStorageService();
