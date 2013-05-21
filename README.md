@@ -36,24 +36,24 @@ __Initialize Services:__
 Initialization has been done in AsyncApp42ServiceApi.java
 
 ```
-        ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
-  			Constants.App42ApiSecret);
-		this.userService = sp.buildUserService();
-		this.storageService = sp.buildStorageService();
-		this.pushService = sp.buildPushNotificationService();
+        		ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
+  				Constants.App42ApiSecret);
+				this.userService = sp.buildUserService();
+				this.storageService = sp.buildStorageService();
+				this.pushService = sp.buildPushNotificationService();
 ```
 
 __Register User:__ First register yourself to play game.
  User registeration has been done in in AsyncApp42ServiceApi.java
 
 ```
-              User user = userService.createUser(name, pswd, email);
+            		 User user = userService.createUser(name, pswd, email);
 ```
 __Authenticate User:__ If you alredy registered with App42 than authentication is required .
  User Authenticatation has been done in in AsyncApp42ServiceApi.java
 
 ```
-             App42Response response = userService.authenticate(
+           		  App42Response response = userService.authenticate(
 							name, pswd);
 ```
 __Push Service registeration :__ To get Push notification you have to register your device on APP42 using PushNotificationService.
@@ -61,41 +61,41 @@ __Push Service registeration :__ To get Push notification you have to register y
 Device Registration is done in MainActivty.java
 
 ```
-           public void doRegistration(Context context, final String userID) {
-			this.context = context;
-			GCMRegistrar.checkDevice(context);
-			GCMRegistrar.checkManifest(context);
-			final String deviceId = GCMRegistrar.getRegistrationId(context);
-			if (deviceId.equals("")) {
-			//Sender Id is equals to our projectNo generated on Google Api console. 
-				GCMRegistrar.register(MainActivity.this, Constants.SENDER_ID);
-			} else {
-				mRegisterTask = new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected Void doInBackground(Void... params) {
-						try {
-							ServiceAPI sp = new ServiceAPI(
-									Constants.App42ApiKey,
-									Constants.App42ApiSecret);
-							String userName = Constants.GameName + userID;
-							PushNotificationService push = sp
-									.buildPushNotificationService();
-							push.storeDeviceToken(userName, deviceId);
-						} catch (Exception e) {
+      	   public void doRegistration(Context context, final String userID) {
+				this.context = context;
+				GCMRegistrar.checkDevice(context);
+				GCMRegistrar.checkManifest(context);
+				final String deviceId = GCMRegistrar.getRegistrationId(context);
+				if (deviceId.equals("")) {
+				//Sender Id is equals to our projectNo generated on Google Api console. 
+					GCMRegistrar.register(MainActivity.this, Constants.SENDER_ID);
+				} else {
+						mRegisterTask = new AsyncTask<Void, Void, Void>() {
+						@Override
+						protected Void doInBackground(Void... params) {
+							try {
+								ServiceAPI sp = new ServiceAPI(
+										Constants.App42ApiKey,
+										Constants.App42ApiSecret);
+								String userName = Constants.GameName + userID;
+								PushNotificationService push = sp
+										.buildPushNotificationService();
+								push.storeDeviceToken(userName, deviceId);
+							} catch (Exception e) {
+							}
+							return null;
 						}
-						return null;
-					}
 
-					@Override
-					protected void onPostExecute(Void result) {
-						mRegisterTask = null;
+						@Override
+						protected void onPostExecute(Void result) {
+							mRegisterTask = null;
 
-					}
+						}
 
-				};
-				mRegisterTask.execute(null, null, null);
+					};
+					mRegisterTask.execute(null, null, null);
+				}
 			}
-		}
 ```
 
 
@@ -153,6 +153,6 @@ __Push meassge:__ Once you have played your turn , you have to send notification
  Push message has been sent in in AsyncApp42ServiceApi.java
 
 ```
-            	pushService.sendPushMessageToUser(Constants.GameName
+            		pushService.sendPushMessageToUser(Constants.GameName
 							+ userName, newGameObj.toString());
 ```
