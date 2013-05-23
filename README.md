@@ -44,7 +44,7 @@ Initialization has been done in AsyncApp42ServiceApi.java
 ```
 
 __Register User:__ First register yourself to play game.
- User registration  has been done in in AsyncApp42ServiceApi.java
+ User registration has been done in in AsyncApp42ServiceApi.java
 
 ```
             		 User user = userService.createUser(name, pswd, email);
