@@ -15,7 +15,7 @@ Here are the few easy steps to run this sample app.
 
 1. [Register] (https://apphq.shephertz.com/register) with App42 platform
 2. Create an app once you are on Quickstart page after registeration.
-3. Goto dashboard and create a new game TicTacToe (Click on Business service manager->game service->add game->)
+3. Goto dashboard and create a new game TicTacToe.
 4. If you are already registered, login to [AppHQ] (http://apphq.shephertz.com) console and create an app from App Manager tab and do step #3 to create a game.
 5. [To use Push Notification see video] (http://www.youtube.com/watch?feature=player_embedded&v=4FtpoRkPuPo).
 6. To use pushNotification service in your application go to https://code.google.com/apis/console , create a new project here.
