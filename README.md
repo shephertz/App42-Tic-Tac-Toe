@@ -50,7 +50,7 @@ __Register User:__ First register yourself to play game.
             		 User user = userService.createUser(name, pswd, email);
 ```
 __Authenticate User:__ If you already  registered with App42 than authentication is required .
- User Authentication  has been done in AsyncApp42ServiceApi.java
+  User Authentication has been done in AsyncApp42ServiceApi.java
 
 ```
            		  App42Response response = userService.authenticate(
