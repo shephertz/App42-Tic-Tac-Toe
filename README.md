@@ -7,9 +7,9 @@ App42-Tic-Tac-Toe
 2. The winning motive of the game is to connect three respective cross or circle in a vertical, horizontal or diagonal direction.
 3. When opponent played his turn, a notification message comes to player that now his turn came.
 
-# Runnning Sample
+# Running Sample
 
-This is a sample Android gaming app is made by using App42 backend platform. It uses user, storage, pushNotification and gaming APIs of App42 platform. 
+This is a sample Android gaming app is made by using App42 backend platform. It uses user, storage, push Notification and gaming APIs of App42 platform. 
 Here are the few easy steps to run this sample app.
 
 
@@ -18,7 +18,7 @@ Here are the few easy steps to run this sample app.
 3. Go to dashboard and create a new game Tic-tac-toe.
 4. If you are already registered, login to [AppHQ] (http://apphq.shephertz.com) console and create an app from App Manager Tab and do step #3 to create a game.
 5. [To use Push Notification see video] (http://www.youtube.com/watch?feature=player_embedded&v=4FtpoRkPuPo).
-6. To use push Notification service in your application go to https://code.google.com/apis/console , create a new project here.
+6. To use push Notification service in your application go to https://code.google.com/apis/console,create a new project here.
 7. Click on services option in Google console and enable Google Cloud Messaging for Android service.
 8. Click on API Access tab and create a new server key for your application with blank server information.
 9. Go to AppHQ console and click on Push Notification and select Android setting in Settings option.
