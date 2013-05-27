@@ -29,6 +29,7 @@
             android:state_enabled="false"
             android:onClick="onSignOutClicked"
             android:text="@string/sign_out_button" />
+        
         <ImageButton
             android:id="@+id/Reload"
             android:layout_width="wrap_content"

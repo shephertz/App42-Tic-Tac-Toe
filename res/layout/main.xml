@@ -75,6 +75,14 @@
 		     android:text="@string/register_button"
 		     android:onClick="onRegisterClicked" />
      </LinearLayout>
+      <ImageView
+		     android:layout_height="60dp"
+		     android:layout_width="wrap_content"
+		     android:layout_marginLeft="8dp"
+		      android:layout_marginTop="10dp"
+		       android:layout_marginRight="8dp"
+		     android:background="@drawable/f_connect"
+		     android:onClick="onFacebookConnect" />
       </LinearLayout>
       </ScrollView>
 </LinearLayout>

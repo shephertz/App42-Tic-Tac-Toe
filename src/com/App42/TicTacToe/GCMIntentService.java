@@ -12,8 +12,10 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
+	public static boolean isFromNotification=false;
+	public static String notificationMessage="";
 	public GCMIntentService() {
-		super(Constants.SENDER_ID);
+		super(Constants.SenderId);
 	}
 
 	@Override
@@ -25,13 +27,14 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	@Override
 	protected void onMessage(Context context, Intent intent) {
+		
 		Log.i(TAG, "Received message");
 		Bundle b = intent.getExtras();
 		String message = (String) b.get("message");
-		if (isGameAlive()) {
+		notificationMessage=message;
 			displayMessage(context, message);
 			generateNotification(context, message);
-		}
+		
 
 	}
 
@@ -78,11 +81,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	}
 
-	private boolean isGameAlive() {
-		SharedPreferences mPrefs = getSharedPreferences(
-				MainActivity.class.getName(), MODE_PRIVATE);
-		return mPrefs.getBoolean(Constants.IsGameAlive, false);
-	}
+
 
 	/**
 	 * Notifies UI to display a message.
@@ -96,8 +95,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 	 *            message to be displayed.
 	 */
 	static void displayMessage(Context context, String message) {
-		Intent intent = new Intent(Constants.DISPLAY_MESSAGE_ACTION);
-		intent.putExtra(Constants.EXTRA_MESSAGE, message);
+		isFromNotification=true;
+		Intent intent = new Intent(Constants.DisplayMessageAction);
+		intent.putExtra(Constants.NotificationMessage, message);
 		context.sendBroadcast(intent);
 	}
 

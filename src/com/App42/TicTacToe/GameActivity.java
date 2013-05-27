@@ -35,6 +35,7 @@ public class GameActivity extends Activity implements
 	private String nextTurn;
 	private ProgressDialog progressDialog;
 	private ImageButton selectedButton = null;
+	private boolean fromNotification=false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,19 @@ public class GameActivity extends Activity implements
 		setContentView(R.layout.game);
 		this.asyncService = AsyncApp42ServiceApi.instance();
 		Intent intent = getIntent();
-		localUserName = intent.getStringExtra(Constants.IntentUserName);
 		try {
+			
+			if(GCMIntentService.isFromNotification){
+				localUserName = getUserName();
+				gameObject = new JSONObject(GCMIntentService.notificationMessage);
+			}
+			else{
+			localUserName = intent.getStringExtra(Constants.IntentUserName);
 			gameObject = new JSONObject(
 					intent.getStringExtra(Constants.IntentGameObject));
+			}
 			this.initialize();
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -55,11 +63,13 @@ public class GameActivity extends Activity implements
 
 	public void onStart() {
 		super.onStart();
-		saveGameStatus(true);
 		registerReceiver(mHandleMessageReceiver, new IntentFilter(
-				Constants.DISPLAY_MESSAGE_ACTION));
+				Constants.DisplayMessageAction));
+		
 	}
-
+/*
+ * This function allows to intialize the game 
+ */
 	private void initialize() {
 		try {
 			String u1Name = gameObject.getString(Constants.GameFirstUserKey);
@@ -67,6 +77,7 @@ public class GameActivity extends Activity implements
 			String winner = gameObject.getString(Constants.GameWinnerKey);
 			currentState = gameObject.getString(Constants.GameStateKey);
 			nextTurn = gameObject.getString(Constants.GameNextMoveKey);
+			checkAndUpdateUserNAme(u1Name,u2Name);
 			if (u1Name.equalsIgnoreCase(localUserName)) {
 				localUserCellImageId = R.drawable.cross_cell;
 				localUserTile = Constants.BoardTileCross;
@@ -107,8 +118,7 @@ public class GameActivity extends Activity implements
 							.setVisibility(View.VISIBLE);
 				} else {
 					((TextView) this.findViewById(R.id.status))
-							.setText("Waiting for " + remoteUserName
-									+ " to move");
+							.setText("Waiting for opponent to move");
 					((Button) this.findViewById(R.id.submit))
 							.setVisibility(View.INVISIBLE);
 				}
@@ -119,13 +129,44 @@ public class GameActivity extends Activity implements
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * This function validate user whether from face-book or App42
+	 */
+	private void checkAndUpdateUserNAme(String u1Name,String u2Name){
+		if(u1Name.equals(UserContext.MyUserName)||
+				u2Name.equals(UserContext.MyUserName)){
+			localUserName=UserContext.MyUserName;
+		}
+	}
+	
 
+	/*
+	 * This function allows to play game again if game is finished
+	 */
 	public void onRematchClicked(View view) {
 		progressDialog = ProgressDialog.show(this, "", "creating game..");
 		progressDialog.setCancelable(true);
-		asyncService.createGame(localUserName, remoteUserName, this);
+		try {
+			gameObject.put(Constants.GameFirstUserKey, localUserName);
+			gameObject.put(Constants.GameSecondUserKey, remoteUserName);
+			gameObject.put(Constants.GameStateKey,
+					Constants.GameStateIdle);
+			gameObject.put(Constants.GameBoardKey,
+					Constants.GameIdleState);
+			gameObject.put(Constants.GameWinnerKey, "");
+			gameObject.put(Constants.GameNextMoveKey, localUserName);
+			asyncService.updateGame(gameObject, this);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
+	/*
+	 * This function allows to handle event on submit button
+	 */
 	public void onSubmitClicked(View view) {
 		try {
 			String boardState = gameObject.getString(Constants.GameBoardKey);
@@ -159,11 +200,13 @@ public class GameActivity extends Activity implements
 			asyncService.updateGame(gameObject, this);
 			asyncService.pushMessage(gameObject, remoteUserName);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * This function checks the status of game
+	 */
 	private boolean isGameOver(String boardState) {
 		// Check rows
 		if (Utilities.areCharsEqual(boardState.charAt(0), boardState.charAt(1),
@@ -201,6 +244,9 @@ public class GameActivity extends Activity implements
 		return false;
 	}
 
+	/*
+	 * This function checks the board is full or not
+	 */
 	private boolean isBoardFull(String boardState) {
 		for (int i = 0; i < 9; i++) {
 			if (boardState.charAt(i) == Constants.BoardTileEmpty) {
@@ -211,6 +257,9 @@ public class GameActivity extends Activity implements
 		return true;
 	}
 
+	/*
+	 * This function handle click event when cell is clicked
+	 */
 	public void onCellClicked(View view) {
 
 		((Button) this.findViewById(R.id.submit)).setClickable(true);
@@ -222,6 +271,9 @@ public class GameActivity extends Activity implements
 		this.selectedCell = getCellIndexFromView(view);
 	}
 
+	/*
+	 * This function returns the index of cell that is clicked
+	 */
 	private int getCellIndexFromView(View view) {
 		int viewId = view.getId();
 		switch (viewId) {
@@ -315,27 +367,28 @@ public class GameActivity extends Activity implements
 
 	}
 
+	/*
+	 * This function retrives user name when notification receives
+	 */
 	private String getUserName() {
 		SharedPreferences mPrefs = getSharedPreferences(
 				MainActivity.class.getName(), MODE_PRIVATE);
 		return mPrefs.getString(Constants.SharedPrefUname, null);
 	}
 
-	public void onNewIntent(Intent newIntent) {
-		super.onNewIntent(newIntent);
-		this.setIntent(newIntent);
-	}
+	
 
+	/*
+	 * This method receives push notification and update the game
+	 */
 	private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			String newMessage = intent.getExtras().getString(
-					Constants.EXTRA_MESSAGE);
-			((TextView) GameActivity.this.findViewById(R.id.status))
-					.setText(newMessage);
+			
 			try {
 				localUserName = getUserName();
-				gameObject = new JSONObject(newMessage);
+				gameObject = new JSONObject(intent.getExtras().getString(
+						Constants.NotificationMessage));
 				GameActivity.this.selectedButton = null;
 				initialize();
 			} catch (Exception e) {
@@ -346,19 +399,12 @@ public class GameActivity extends Activity implements
 
 	};
 
-	private void saveGameStatus(boolean isAlive) {
-		SharedPreferences mPrefs = getSharedPreferences(
-				MainActivity.class.getName(), MODE_PRIVATE);
-		SharedPreferences.Editor editor = mPrefs.edit();
-		editor.putBoolean(Constants.IsGameAlive, isAlive);
-		editor.commit();
-	}
+
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(mHandleMessageReceiver);
-		saveGameStatus(false);
 	}
 
 	@Override

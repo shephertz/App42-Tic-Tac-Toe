@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements
 	private EditText emailid;
 	private SharedPreferences mPrefs;
 	private ProgressDialog progressDialog;
-	AsyncTask<Void, Void, Void> mRegisterTask;
+
 
 	/** Called when the activity is first created. */
 	@Override
@@ -71,6 +71,12 @@ public class MainActivity extends Activity implements
 		asyncService.createUser(userName.getText().toString(), password
 				.getText().toString(), emailid.getText().toString(), this);
 	}
+	
+	public void onFacebookConnect(View view){
+		this.finish();
+		Intent mainIntent = new Intent(this, FriendList.class);
+		this.startActivity(mainIntent);
+	}
 
 	private void saveCreds() {
 		mPrefs = getSharedPreferences(MainActivity.class.getName(),
@@ -84,7 +90,6 @@ public class MainActivity extends Activity implements
 	private void gotoHomeActivity(String signedInUserName) {
 		// Finish the splash activity so it can't be returned to.
 		this.finish();
-		// Create an Intent that will start the home activity.
 		Intent mainIntent = new Intent(this, UserHomeActivity.class);
 		mainIntent.putExtra(Constants.IntentUserName, signedInUserName);
 		this.startActivity(mainIntent);
@@ -95,8 +100,7 @@ public class MainActivity extends Activity implements
 		progressDialog.dismiss();
 		if (user != null) {
 			saveCreds();
-			new PushRegistration().doRegistration(this, userName.getText()
-					.toString());
+			asyncService.registerForPushNotification(this, userName.getText().toString());
 			gotoHomeActivity(userName.getText().toString());
 		} else {
 			Toast.makeText(this, "User creation failed.", Toast.LENGTH_SHORT)
@@ -110,8 +114,8 @@ public class MainActivity extends Activity implements
 		if (response != null) {
 			System.out.println(response.toString());
 			saveCreds();
-			new PushRegistration().doRegistration(this, userName.getText()
-					.toString());
+			asyncService.registerForPushNotification(this, userName.getText().toString());
+		
 			gotoHomeActivity(userName.getText().toString());
 		} else {
 			Toast.makeText(this, "Authentication failed..!!",
@@ -141,52 +145,47 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (mRegisterTask != null) {
-			mRegisterTask.cancel(true);
-		}
-		// unregisterReceiver(mHandleMessageReceiver);
-		GCMRegistrar.onDestroy(this);
-
+		
 	}
 
-	private class PushRegistration {
-		Context context;
-
-		public void doRegistration(Context context, final String userID) {
-			this.context = context;
-			GCMRegistrar.checkDevice(context);
-			GCMRegistrar.checkManifest(context);
-			// registerReceiver(mHandleMessageReceiver, new IntentFilter(
-			// Constants.DISPLAY_MESSAGE_ACTION));
-			final String deviceId = GCMRegistrar.getRegistrationId(context);
-			if (deviceId.equals("")) {
-				GCMRegistrar.register(MainActivity.this, Constants.SENDER_ID);
-			} else {
-				mRegisterTask = new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected Void doInBackground(Void... params) {
-						try {
-							ServiceAPI sp = new ServiceAPI(
-									Constants.App42ApiKey,
-									Constants.App42ApiSecret);
-							String userName = Constants.GameName + userID;
-							PushNotificationService push = sp
-									.buildPushNotificationService();
-							push.storeDeviceToken(userName, deviceId);
-						} catch (Exception e) {
-						}
-						return null;
-					}
-
-					@Override
-					protected void onPostExecute(Void result) {
-						mRegisterTask = null;
-
-					}
-
-				};
-				mRegisterTask.execute(null, null, null);
-			}
-		}
-	}
+//	private class PushRegistration {
+//		Context context;
+//
+//		public void doRegistration(Context context, final String userID) {
+//			this.context = context;
+//			GCMRegistrar.checkDevice(context);
+//			GCMRegistrar.checkManifest(context);
+//			// registerReceiver(mHandleMessageReceiver, new IntentFilter(
+//			// Constants.DISPLAY_MESSAGE_ACTION));
+//			final String deviceId = GCMRegistrar.getRegistrationId(context);
+//			if (deviceId.equals("")) {
+//				GCMRegistrar.register(MainActivity.this, Constants.SenderId);
+//			} else {
+//				mRegisterTask = new AsyncTask<Void, Void, Void>() {
+//					@Override
+//					protected Void doInBackground(Void... params) {
+//						try {
+//							ServiceAPI sp = new ServiceAPI(
+//									Constants.App42ApiKey,
+//									Constants.App42ApiSecret);
+//							String userName = Constants.GameName + userID;
+//							PushNotificationService push = sp
+//									.buildPushNotificationService();
+//							push.storeDeviceToken(userName, deviceId);
+//						} catch (Exception e) {
+//						}
+//						return null;
+//					}
+//
+//					@Override
+//					protected void onPostExecute(Void result) {
+//						mRegisterTask = null;
+//
+//					}
+//
+//				};
+//				mRegisterTask.execute(null, null, null);
+//			}
+//		}
+//	}
 }

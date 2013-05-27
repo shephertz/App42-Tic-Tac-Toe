@@ -1,5 +1,6 @@
 package com.App42.TicTacToe;
 
+
 import org.json.JSONObject;
 
 import android.app.ListActivity;
@@ -12,15 +13,14 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 //import com.facebook.android.R;
 
-public class UserHomeActivity extends ListActivity {
+public class FbFriendGameList extends ListActivity {
 
-	private String userName;
-	private EditText newGameOppName;
-
-	private GamesListAdapter adapter;
+	
+	private FbGameListAdapter adapter;
 	private ProgressDialog progressDialog;
 	private ImageView profileImage;
 
@@ -33,32 +33,15 @@ public class UserHomeActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_home);
-		newGameOppName = (EditText) findViewById(R.id.opp_name);
-		profileImage = (ImageView) findViewById(R.id.profile_pic);
+		setContentView(R.layout.fb_game_home);
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-		userName = getIntent().getStringExtra(Constants.IntentUserName);
-
-		// create adapter after fetching userName parameter from intent.
-		adapter = new GamesListAdapter(this, userName);
+		((TextView)findViewById(R.id.my_name)).setText(UserContext.MyDisplayName);
+		ImageView myimage=(ImageView)findViewById(R.id.my_pic);
+		Utilities.loadImageFromUrl(myimage, UserContext.MyPicUrl);
+		adapter = new FbGameListAdapter(this);
 		this.setListAdapter(adapter);
 	}
-
-	public void onStartGameClicked(View view) {
-		String opponent = newGameOppName.getText().toString();
-		if (opponent.isEmpty() || opponent.equals(userName)) {
-			return;
-		}
-		progressDialog = ProgressDialog.show(this, "", "creating game..");
-		progressDialog.setCancelable(true);
-		adapter.beginNewGame(newGameOppName.getText().toString());
-	}
-
-	public void onProfileClicked(View view) {
-	}
-
 	public void onOperationSuccess() {
 		progressDialog.dismiss();
 	}
@@ -66,33 +49,25 @@ public class UserHomeActivity extends ListActivity {
 	public void onOperationFail() {
 		progressDialog.dismiss();
 	}
-
-	public void onSignOutClicked(View view) {
-		SharedPreferences mPrefs = getSharedPreferences(
-				MainActivity.class.getName(), MODE_PRIVATE);
-		SharedPreferences.Editor editor = mPrefs.edit();
-		editor.remove(Constants.SharedPrefUname);
-		editor.apply();
-		finish();
-		Intent myIntent = new Intent(this, MainActivity.class);
-		this.startActivity(myIntent);
+	public void onPlayApp42Clicked(View view) {
+		Intent intent=new Intent(this,MainActivity.class);
+		this.finish();
+		startActivity(intent);
 	}
 
-	public void onReloadClicked(View view) {
+	public void onRefreshClicked(View view) {
 		progressDialog = ProgressDialog.show(this, "", "loading games");
 		progressDialog.setCancelable(true);
-		this.adapter.refreshNewUserList(userName);
+		this.adapter.refreshNewUserList();
 	}
 
 	public void onStart() {
 		super.onStart();
 		Intent intent = getIntent();
-		userName = intent.getStringExtra(Constants.IntentUserName);
-
 		if (adapter.getCount() < 1) {
 			progressDialog = ProgressDialog.show(this, "", "loading games");
 		}
-		this.adapter.refreshNewUserList(userName);
+		this.adapter.refreshNewUserList();
 	}
 
 	public void onNewIntent(Intent newIntent) {
@@ -107,7 +82,7 @@ public class UserHomeActivity extends ListActivity {
 		GCMIntentService.isFromNotification=false;
 		Intent myIntent = new Intent(this, GameActivity.class);
 		myIntent.putExtra(Constants.IntentGameObject, game.toString());
-		myIntent.putExtra(Constants.IntentUserName, userName);
+		myIntent.putExtra(Constants.IntentUserName, UserContext.MyUserName);
 		this.startActivity(myIntent);
 	}
 }
