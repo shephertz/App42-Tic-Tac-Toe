@@ -75,34 +75,34 @@ Device Registration is done in AsyncApp42ServiceApi.java
 
 ```
       	   public void registerForPushNotification(Context context,final String userID) {
-		GCMRegistrar.checkDevice(context);
-		GCMRegistrar.checkManifest(context);
-		final String deviceId = GCMRegistrar.getRegistrationId(context);
-		if (deviceId.equals("")) {
-			GCMRegistrar.register(context, Constants.SenderId);
-		} else {
-			final Handler callerThreadHandler = new Handler();
-			new Thread() {
-				@Override
-				public void run() {
-					try {
-						ServiceAPI sp = new ServiceAPI(
-								Constants.App42ApiKey,
-								Constants.App42ApiSecret);
-						String userName = Constants.GameName+ userID;
-						pushService.storeDeviceToken(userName, deviceId);
-						callerThreadHandler.post(new Runnable() {
-							@Override
-							public void run() {
+			GCMRegistrar.checkDevice(context);
+			GCMRegistrar.checkManifest(context);
+			final String deviceId = GCMRegistrar.getRegistrationId(context);
+			if (deviceId.equals("")) {
+				GCMRegistrar.register(context, Constants.SenderId);
+			} else {
+				final Handler callerThreadHandler = new Handler();
+				new Thread() {
+					@Override
+					public void run() {
+						try {
+							ServiceAPI sp = new ServiceAPI(
+									Constants.App42ApiKey,
+									Constants.App42ApiSecret);
+							String userName = Constants.GameName+ userID;
+							pushService.storeDeviceToken(userName, deviceId);
+							callerThreadHandler.post(new Runnable() {
+								@Override
+								public void run() {
 
-							}
-						});
-					} catch (Exception e) {
+								}
+							});
+						} catch (Exception e) {
 
+						}
 					}
-				}
-			}.start();
-		}
+				}.start();
+			}
 	}
 ```
 __Create Game with face-book friends:__ To challenge your friend to play game.
@@ -141,26 +141,26 @@ __Create Game:__ While starting a new game with opponent you have to create a ga
 		public void createGameWithFbFriend(final String friendId,final String friendName,final String frindPicUrl,
 			final FriendList callBack){
 
-		final Handler callerThreadHandler = new Handler();
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					final JSONObject gameObject = new JSONObject();
-					gameObject.put(Constants.GameFirstUserKey, UserContext.MyUserName);
-					gameObject.put(Constants.GameSecondUserKey, friendId);
+			final Handler callerThreadHandler = new Handler();
+			new Thread() {
+				@Override
+				public void run() {
+					try {
+						final JSONObject gameObject = new JSONObject();
+						gameObject.put(Constants.GameFirstUserKey, UserContext.MyUserName);
+						gameObject.put(Constants.GameSecondUserKey, friendId);
 					
-					gameObject.put(Constants.GameFbName, UserContext.MyDisplayName);
-					gameObject.put(Constants.GameFbFriendName, friendName);
+						gameObject.put(Constants.GameFbName, UserContext.MyDisplayName);
+						gameObject.put(Constants.GameFbFriendName, friendName);
 					
-					gameObject.put(Constants.GameMyPicUrl, UserContext.MyPicUrl);
-					gameObject.put(Constants.GameFriendPicUrl, frindPicUrl);
+						gameObject.put(Constants.GameMyPicUrl, UserContext.MyPicUrl);
+						gameObject.put(Constants.GameFriendPicUrl, frindPicUrl);
 					
-					gameObject.put(Constants.GameStateKey,
+						gameObject.put(Constants.GameStateKey,
 							Constants.GameStateIdle);
-					gameObject.put(Constants.GameBoardKey,Constants.GameIdleState);
-					gameObject.put(Constants.GameWinnerKey, "");
-					gameObject.put(Constants.GameNextMoveKey, friendId);
+						gameObject.put(Constants.GameBoardKey,Constants.GameIdleState);
+						gameObject.put(Constants.GameWinnerKey, "");
+						gameObject.put(Constants.GameNextMoveKey, friendId);
 		
 						gameObject.put(Constants.GameIdKey, java.util.UUID
 								.randomUUID().toString());
@@ -176,27 +176,27 @@ __Create Game:__ While starting a new game with opponent you have to create a ga
 										gameObject.toString());
 
 
-					callerThreadHandler.post(new Runnable() {
-						@Override
-						public void run() {
-							callBack.onCreateGame(true,gameObject,friendId);
-						}
-					});
-
-				} catch (Exception e) {
-					callerThreadHandler.post(new Runnable() {
-						@Override
-						public void run() {
-							if (callBack != null) {
-								callBack.onCreateGame(false,null,null);
+						callerThreadHandler.post(new Runnable() {
+							@Override
+							public void run() {
+								callBack.onCreateGame(true,gameObject,friendId);
 							}
-						}
-					});
+						});
+
+					} catch (Exception e) {
+						callerThreadHandler.post(new Runnable() {
+							@Override
+							public void run() {
+								if (callBack != null) {
+									callBack.onCreateGame(false,null,null);
+								}
+							}
+						});
+					}
 				}
-			}
-		}.start();
+			}.start();
 	
-	}
+		}
 ```
 
 __Update Game:__ While playing game.
