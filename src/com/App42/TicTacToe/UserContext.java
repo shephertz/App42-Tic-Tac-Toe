@@ -1,6 +1,6 @@
 package com.App42.TicTacToe;
 /**
- * This class allows user to save information throught the application
+ * This class allows user to save inforamation of user
  *
  */
 public class UserContext {

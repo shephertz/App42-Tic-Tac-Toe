@@ -33,7 +33,7 @@ import com.shephertz.app42.paas.sdk.android.social.Social.Friends;
 
 
 /*
- * This class is used to show facebook friendlist
+ * This class is allows user to show face-book friend-list
  */
 public class FriendList extends Activity implements OnItemClickListener {
 	private ListView friendList;
@@ -60,8 +60,8 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * Used to load friend list if user is authenticated else autherize user
-	 * first
+	 * This function allows user to load friend list if user is authenticated
+	 * 
 	 */
 	private void loadMyFriendList() {
 		if (Utilities.haveNetworkConnection(this)) {
@@ -84,7 +84,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * Check internet connectivity (non-Javadoc)
+	 * Check Internet connectivity (non-Javadoc)
 	 * 
 	 * @see android.app.Activity#onStart()
 	 */
@@ -116,11 +116,8 @@ public class FriendList extends Activity implements OnItemClickListener {
 	
 
 	 /*
-	  * Callback when user select image from gallery for upload
-	  * and call previewImagePopup for preview
-	  * User autherize with facebook on first time and he has to send autherize callback
-	  * 
-	  * (non-Javadoc)
+	
+	  * This function allows to send authorization callback to face-book
 	  * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
 	  */
 	@Override
@@ -136,8 +133,8 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * Callback when we autherize with facebook
-	 * If succes load my friend list
+	 * Callback when authorization with face-book
+	 * If success load my friend list
 	 */
 	 void onFacebookProfileRetreived(boolean isSuccess) {
 			if (isSuccess) {
@@ -156,9 +153,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * * This method is called when a Activty is stop disable all the events if
-	 * occuring (non-Javadoc)
-	 * 
+	 * (non-Javadoc)
 	 * @see android.app.Activity#onStop()
 	 */
 	public void onStop() {
@@ -167,7 +162,6 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * This method is called when a Activty is finished or user press the back
 	 * button (non-Javadoc)
 	 * 
 	 * @override method of superclass
@@ -210,8 +204,8 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * used to create alert dialog when logout option is selected
-	 * @param name of friend whom you want to sahre image
+	 * This function allows user to create alert dialog when logout option is selected
+	 * @param name of friend whom you want to share image
 	 */
 	public void challengeFriendDialog(String name) {
 		AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
@@ -269,7 +263,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * Used to show facebook friend list when user gets friends information
+	 * This function allows user to show facebook friend list when user gets friends information
 	 * @param friendsInfo contains information of friends like id/picUrl/name/application installed status
 	 */
 	private void showFriendList(ArrayList<Friends> friendsInfo) {
@@ -308,7 +302,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	
 	
 	/*
-	 * Used to show search list when user search his friend
+	 * This function allows user to show search list when user search his friend
 	 */
 	private void showSearchList(CharSequence s, int start, int before,
 			int count, EditText search) {
@@ -333,7 +327,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * Call back method when friend list is fethed
+	 * Call back method when friend list is fetched
 	 */
 	 void onFriendListFetched(ArrayList<Friends> fbFriends) {
 		dialog.dismiss();
@@ -349,7 +343,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	 /*
-	  * Used to show friend list
+	  * This function allows user to show friend list
 	  */
 	private class ActionListAdapter extends ArrayAdapter<Friends> {
 		private List<Friends> listElementAdapter;
@@ -393,7 +387,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 
 	}
 /*
- * Used to browse dialog when friend is clicked
+ * This function allows user to browse dialog when friend is clicked
  * (non-Javadoc)
  * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
  */
@@ -417,7 +411,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * used to create menu
+	 * This function allows user to create menu
 	 */
 	private void CreateMenu(Menu menu) {
 		menu.setQwertyMode(true);
@@ -426,7 +420,7 @@ public class FriendList extends Activity implements OnItemClickListener {
 	}
 
 	/*
-	 * used to handle selection of option menu
+	 * This function allows user to handle selection of option menu
 	 */
 	private boolean MenuChoice(MenuItem item) {
 		switch (item.getItemId()) {

@@ -195,7 +195,6 @@ public class GameActivity extends Activity implements
 				gameObject.put(Constants.GameStateKey,
 						Constants.GameStateActive);
 			}
-
 			progressDialog = ProgressDialog.show(this, "", "sending move");
 			asyncService.updateGame(gameObject, this);
 			asyncService.pushMessage(gameObject, remoteUserName);

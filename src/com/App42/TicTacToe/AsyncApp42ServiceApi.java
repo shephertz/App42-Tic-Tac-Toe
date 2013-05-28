@@ -40,6 +40,9 @@ public class AsyncApp42ServiceApi {
 
 	}
 
+	/*
+	 * instance of class
+	 */
 	public static AsyncApp42ServiceApi instance() {
 
 		if (mInstance == null) {
@@ -49,9 +52,9 @@ public class AsyncApp42ServiceApi {
 		return mInstance;
 	}
 	/*
-	 * Used to load all Facebook friends
+	 * This function allows user to load all Face-book friends
 	 * @param userID FB id of user
-	 * @param accessToken facebook accesstoken
+	 * @param accessToken face-book access token
 	 * @param callback instance of class on which we have to return
 	 */
 	public void loadAllFriends(final String userID, final String accessToken,
@@ -87,6 +90,9 @@ public class AsyncApp42ServiceApi {
 		}.start();
 	}
 	
+	/*
+	 * This function allows to create user using APP42 service
+	 */
 	public void createUser(final String name, final String pswd,
 			final String email, final App42ServiceListener callBack) {
 		final Handler callerThreadHandler = new Handler();
@@ -116,6 +122,10 @@ public class AsyncApp42ServiceApi {
 			}
 		}.start();
 	}
+	
+	/*
+	 * This function allows to register device for PushNotification service
+	 */
 	public void registerForPushNotification(Context context,final String userID) {
 		GCMRegistrar.checkDevice(context);
 		GCMRegistrar.checkManifest(context);
@@ -146,6 +156,10 @@ public class AsyncApp42ServiceApi {
 			}.start();
 		}
 	}
+	
+	/*
+	 * This function validate user's authentication with APP42
+	 */
 	public void authenticateUser(final String name, final String pswd,
 			final App42ServiceListener callBack) {
 		final Handler callerThreadHandler = new Handler();
@@ -176,6 +190,9 @@ public class AsyncApp42ServiceApi {
 		}.start();
 	}
 
+	/*
+	 * This function fetches gameList of user with APP42 
+	 */
 	public void getUserGamesList(final String uname,
 			final App42ServiceListener callBack) {
 		final Handler callerThreadHandler = new Handler();
@@ -204,6 +221,9 @@ public class AsyncApp42ServiceApi {
 		}.start();
 	}
 	
+	/*
+	 * This function allows user to create game with face-book friends
+	 */
 	public void createGameWithFbFriend(final String friendId,final String friendName,final String frindPicUrl,
 			final FriendList callBack){
 
@@ -264,6 +284,9 @@ public class AsyncApp42ServiceApi {
 	
 	}
 
+	/*
+	 * This function allows user to create game with App42 users
+	 */
 	public void createGame(final String uname1, final String remoteUserName,
 			final App42ServiceListener callBack) {
 		final Handler callerThreadHandler = new Handler();
@@ -306,6 +329,9 @@ public class AsyncApp42ServiceApi {
 		}.start();
 	}
 
+	/*
+	 * This function update the game information on App42 server
+	 */
 	public void updateGame(final JSONObject newGameObj,
 			final App42ServiceListener callBack) {
 		final Handler callerThreadHandler = new Handler();
@@ -338,6 +364,10 @@ public class AsyncApp42ServiceApi {
 		}.start();
 	}
 
+	
+	/*
+	 * This funstion allows user to send push message to opponent user
+	 */
 	public void pushMessage(final JSONObject newGameObj, final String userName) {
 		final Handler callerThreadHandler = new Handler();
 		new Thread() {

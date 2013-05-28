@@ -45,7 +45,10 @@ public class SplashActivity extends Activity {
 		}, Constants.SPLASH_DISPLAY_TIME);
 
 	}
-
+/*
+ * (non-Javadoc)
+ * @see android.app.Activity#onCreateDialog(int)
+ */
 	protected Dialog onCreateDialog(int id) {
 		AlertDialog dialog = null;
 		switch (id) {
@@ -69,6 +72,9 @@ public class SplashActivity extends Activity {
 		return dialog;
 	}
 
+	/*
+	 * This function allows user to check Internet connectivity
+	 */
 	private boolean isInternetConnected() {
 		boolean haveConnectedWifi = false;
 		boolean haveConnectedMobile = false;

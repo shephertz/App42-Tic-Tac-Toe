@@ -148,44 +148,4 @@ public class MainActivity extends Activity implements
 		
 	}
 
-//	private class PushRegistration {
-//		Context context;
-//
-//		public void doRegistration(Context context, final String userID) {
-//			this.context = context;
-//			GCMRegistrar.checkDevice(context);
-//			GCMRegistrar.checkManifest(context);
-//			// registerReceiver(mHandleMessageReceiver, new IntentFilter(
-//			// Constants.DISPLAY_MESSAGE_ACTION));
-//			final String deviceId = GCMRegistrar.getRegistrationId(context);
-//			if (deviceId.equals("")) {
-//				GCMRegistrar.register(MainActivity.this, Constants.SenderId);
-//			} else {
-//				mRegisterTask = new AsyncTask<Void, Void, Void>() {
-//					@Override
-//					protected Void doInBackground(Void... params) {
-//						try {
-//							ServiceAPI sp = new ServiceAPI(
-//									Constants.App42ApiKey,
-//									Constants.App42ApiSecret);
-//							String userName = Constants.GameName + userID;
-//							PushNotificationService push = sp
-//									.buildPushNotificationService();
-//							push.storeDeviceToken(userName, deviceId);
-//						} catch (Exception e) {
-//						}
-//						return null;
-//					}
-//
-//					@Override
-//					protected void onPostExecute(Void result) {
-//						mRegisterTask = null;
-//
-//					}
-//
-//				};
-//				mRegisterTask.execute(null, null, null);
-//			}
-//		}
-//	}
 }
