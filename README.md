@@ -50,23 +50,22 @@ _Get Face-book Friends:__
 This has been done in  AsyncApp42ServiceApi.java
 
 ```
-                  	Social linkObj = socialService.linkUserFacebookAccount(userID,
-							accessToken);
-		   		Social socialObj = socialService.getFacebookFriendsFromLinkUser(userID);
-		       	final ArrayList<Friends> friendList =socialObj.getFriendList();
+                	Social linkObj = socialService.linkUserFacebookAccount(userID,	accessToken);
+		   			Social socialObj = socialService.getFacebookFriendsFromLinkUser(userID);
+		       		final ArrayList<Friends> friendList =socialObj.getFriendList();
 ```
 
 __Register User:__ First register yourself to play game.
  User registration has been done in AsyncApp42ServiceApi.java
 
 ```
-            		User user = userService.createUser(name, pswd, email);
+            	User user = userService.createUser(name, pswd, email);
 ```
 __Authenticate User:__ If you already  registered with App42 than authentication is required .
   User Authentication has been done in AsyncApp42ServiceApi.java
 
 ```
-           		  App42Response response = userService.authenticate(
+           		App42Response response = userService.authenticate(
 							name, pswd);
 ```
 __Push Service registration :__ To get Push notification you have to register your device on APP42 using PushNotificationService.
