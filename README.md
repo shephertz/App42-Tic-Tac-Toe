@@ -52,7 +52,7 @@ This has been done in  AsyncApp42ServiceApi.java
 ```
                   	Social linkObj = socialService.linkUserFacebookAccount(userID,
 							accessToken);
-		  	Social socialObj = socialService.getFacebookFriendsFromLinkUser(userID);
+		   		Social socialObj = socialService.getFacebookFriendsFromLinkUser(userID);
 		       	final ArrayList<Friends> friendList =socialObj.getFriendList();
 ```
 
