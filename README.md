@@ -56,12 +56,14 @@ This has been done in  AsyncApp42ServiceApi.java
 ```
 
 __Register User:__ First register yourself using our User Service API.
+
  User registration has been done in AsyncApp42ServiceApi.java
 
 ```
             	User user = userService.createUser(name, pswd, email);
 ```
 __Authenticate User:__ If you already registered with App42 than use User Service API for authentication.
+
   User Authentication has been done in AsyncApp42ServiceApi.java
 
 ```
@@ -105,6 +107,7 @@ Device Registration is done in AsyncApp42ServiceApi.java
 	}
 ```
 __Create Game with face-book friends:__ To challenge your friend to you have to use our Storage Service API.
+
 Game creation has been done in AsyncApp42ServiceApi.java
 
 ```
@@ -134,6 +137,7 @@ Game creation has been done in AsyncApp42ServiceApi.java
 
 
 __Create Game:__ While starting a new game with opponent you have to create a game using our Storage Service API.
+ 
  Game creation has been done in AsyncApp42ServiceApi.java
  
 ```
@@ -198,8 +202,9 @@ __Create Game:__ While starting a new game with opponent you have to create a ga
 		}
 ```
 
-__Update Game:__ While playing game , you have to use our Storage Service API for game update.
-  Game updating has been done in AsyncApp42ServiceApi.java
+__Update Game:__ While playing game , you have to use our Storage Service API for game updates.
+ 
+ Game updating has been done in AsyncApp42ServiceApi.java
 ```
                     final JSONObject gameObject = new JSONObject();
 					gameObject.put(Constants.GameFirstUserKey, uname1);
@@ -227,6 +232,7 @@ __Push message:__ You have to use our PushNotification Service API in following 
 
  Whenever a game is created with friend or APP42 user you have to send notification to opponent.
  When Game is running, once you have played you have to send Push Notification to your opponent that now its his turn.
+ 
  Push message has been sent in AsyncApp42ServiceApi.java
 
 ```
