@@ -45,7 +45,7 @@ Initialization has been done in AsyncApp42ServiceApi.java
 				this.socialService=sp.buildSocialService();
 ```
 
-_Get Face-book Friends:__ We have to use Social Service API to get all face-book friends.
+_Get Face-book Friends:__ You have to use Social Service API to get all face-book friends.
 
 This has been done in  AsyncApp42ServiceApi.java
 
