@@ -5,7 +5,7 @@ App42-Tic-Tac-Toe
 
 1. It’s a multi-player turn based game.
 2. The winning motive of the game is to connect three respective cross or circle in a vertical, horizontal or diagonal direction.
-3. When opponent played his turn, a push notification is beinng sent to other opponent about his turn.
+3. When opponent played his turn, a push notification is being sent to other opponent about his turn.
 
 # Running Sample
 
@@ -42,9 +42,10 @@ Initialization has been done in AsyncApp42ServiceApi.java
 				this.userService = sp.buildUserService();
 				this.storageService = sp.buildStorageService();
 				this.pushService = sp.buildPushNotificationService();
+				this.socialService=sp.buildSocialService();
 ```
 
-_Get Face-book Friends:__
+_Get Face-book Friends:__ We have to use Social Service API to get all face-book friends.
 
 This has been done in  AsyncApp42ServiceApi.java
 
@@ -54,20 +55,20 @@ This has been done in  AsyncApp42ServiceApi.java
 		       		final ArrayList<Friends> friendList =socialObj.getFriendList();
 ```
 
-__Register User:__ First register yourself to play game.
+__Register User:__ First register yourself using our User Service API.
  User registration has been done in AsyncApp42ServiceApi.java
 
 ```
             	User user = userService.createUser(name, pswd, email);
 ```
-__Authenticate User:__ If you already  registered with App42 than authentication is required .
+__Authenticate User:__ If you already registered with App42 than use User Service API for authentication.
   User Authentication has been done in AsyncApp42ServiceApi.java
 
 ```
            		App42Response response = userService.authenticate(
 							name, pswd);
 ```
-__Push Service registration :__ To get Push notification you have to register your device on APP42 using PushNotificationService.
+__Push Service registration :__ To get Push notification you have to register your device on APP42 using PushNotification Service API.
 
 Device Registration is done in AsyncApp42ServiceApi.java
 
@@ -103,7 +104,7 @@ Device Registration is done in AsyncApp42ServiceApi.java
 			}
 	}
 ```
-__Create Game with face-book friends:__ To challenge your friend to play game.
+__Create Game with face-book friends:__ To challenge your friend to you have to use our Storage Service API.
 Game creation has been done in AsyncApp42ServiceApi.java
 
 ```
@@ -132,7 +133,7 @@ Game creation has been done in AsyncApp42ServiceApi.java
 
 
 
-__Create Game:__ While starting a new game with opponent you have to create a game.
+__Create Game:__ While starting a new game with opponent you have to create a game using our Storage Service API.
  Game creation has been done in AsyncApp42ServiceApi.java
  
 ```
@@ -197,7 +198,7 @@ __Create Game:__ While starting a new game with opponent you have to create a ga
 		}
 ```
 
-__Update Game:__ While playing game.
+__Update Game:__ While playing game , you have to use our Storage Service API for game update.
   Game updating has been done in AsyncApp42ServiceApi.java
 ```
                     final JSONObject gameObject = new JSONObject();
@@ -222,7 +223,10 @@ __Update Game:__ While playing game.
 									+ remoteUserName, gameObject.toString());
 ```
 
-__Push message:__ Once you have played your turn , you have to send notification to your opponent
+__Push message:__ You have to use our PushNotification Service API in following scenarios.
+
+ Whenever a game is created with friend or APP42 user you have to send notification to opponent.
+ When Game is running, once you have played you have to send Push Notification to your opponent that now its his turn.
  Push message has been sent in AsyncApp42ServiceApi.java
 
 ```
