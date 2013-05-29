@@ -40,14 +40,12 @@ public class MainActivity extends Activity implements
 		userName = (EditText) this.findViewById(R.id.uname);
 		password = (EditText) this.findViewById(R.id.pswd);
 		emailid = (EditText) this.findViewById(R.id.email);
-		mPrefs = getSharedPreferences(MainActivity.class.getName(),
+		mPrefs = getSharedPreferences(Constants.TicTacToePref,
 				MODE_PRIVATE);
 		asyncService = AsyncApp42ServiceApi.instance();
-		String loggedInName = mPrefs.getString(Constants.SharedPrefUname, null);
-		if (loggedInName != null && !loggedInName.isEmpty()) {
-
-			gotoHomeActivity(loggedInName);
-		}
+	userName.setText(mPrefs.getString(Constants.SharedPrefUname, ""));
+	password.setText(mPrefs.getString(Constants.SharedPrefPassword, ""));
+	emailid.setText(mPrefs.getString(Constants.SharedPrefEmail, ""));
 	}
 
 	public void onSaveInstanceState(Bundle outState) {
@@ -79,10 +77,12 @@ public class MainActivity extends Activity implements
 	}
 
 	private void saveCreds() {
-		mPrefs = getSharedPreferences(MainActivity.class.getName(),
-				MODE_PRIVATE);
 		SharedPreferences.Editor editor = mPrefs.edit();
 		editor.putString(Constants.SharedPrefUname, userName.getText()
+				.toString());
+		editor.putString(Constants.SharedPrefPassword, password.getText()
+				.toString());
+		editor.putString(Constants.SharedPrefEmail, emailid.getText()
 				.toString());
 		editor.commit();
 	}
@@ -115,7 +115,6 @@ public class MainActivity extends Activity implements
 			System.out.println(response.toString());
 			saveCreds();
 			asyncService.registerForPushNotification(this, userName.getText().toString());
-		
 			gotoHomeActivity(userName.getText().toString());
 		} else {
 			Toast.makeText(this, "Authentication failed..!!",

@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
+        
       
     </LinearLayout>
     
@@ -41,20 +42,12 @@
 </LinearLayout>
 
  <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:layout_gravity="right">
 
-        <Button
-            android:id="@+id/shared"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.12"
-            android:onClick="onPlayApp42Clicked"
-            android:text="Play with App42" >
-        </Button>
-
+   
 
         <Button
             android:id="@+id/refresh"

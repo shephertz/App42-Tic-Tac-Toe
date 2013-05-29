@@ -10,9 +10,11 @@ public class Constants {
 	public static final String FB_APP_ID = "146820035504808";
 
 	public static final String SharedPrefUname = "logged_in_username";
+	public static final String SharedPrefPassword = "logged_in_password";
+	public static final String SharedPrefEmail = "logged_in_Email";
 	public static final String IntentUserName = "intentUserName";
 	public static final String IntentGameObject = "intentGameobj";
-
+	public static final String TicTacToePref="App42TicTacToePreferences";
 	public static final String App42UserStorageId = "user_storage_id";
 	public static final String App42UserStoreGameListName = "games_list";
 	public static final String App42DBName = "tictactoe2";

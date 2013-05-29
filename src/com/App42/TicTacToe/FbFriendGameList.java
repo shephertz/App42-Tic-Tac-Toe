@@ -45,12 +45,6 @@ public class FbFriendGameList extends ListActivity {
 	public void onOperationFail() {
 		progressDialog.dismiss();
 	}
-	public void onPlayApp42Clicked(View view) {
-		Intent intent=new Intent(this,MainActivity.class);
-		this.finish();
-		startActivity(intent);
-	}
-
 	public void onRefreshClicked(View view) {
 		progressDialog = ProgressDialog.show(this, "", "loading games");
 		progressDialog.setCancelable(true);

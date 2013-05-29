@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:text="1234"
+        android:text=""
          android:layout_marginLeft="5dp"
          android:layout_marginRight="5dp"
         android:hint="@string/username" />
@@ -43,7 +43,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-           android:text="1234"
+           android:text=""
             android:layout_marginLeft="5dp"
          android:layout_marginRight="5dp"
         android:hint="@string/password" />    
@@ -51,7 +51,7 @@
         android:id="@+id/email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-           android:text="1234@gmail.com"
+           android:text=""
             android:layout_marginLeft="5dp"
          android:layout_marginRight="5dp"
         android:inputType="textEmailAddress"        
@@ -75,6 +75,22 @@
 		     android:text="@string/register_button"
 		     android:onClick="onRegisterClicked" />
      </LinearLayout>
+     
+             android:orientation="vertical" >
+    <TextView
+        android:id="@+id/login_facebook"
+        android:maxLines="1"
+        android:textSize="25sp"           
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"                                  
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"          
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"   
+        android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp"
+        android:layout_gravity="center"  
+        android:text="Or Sign with Facebook"/>   
       <ImageView
 		     android:layout_height="60dp"
 		     android:layout_width="wrap_content"

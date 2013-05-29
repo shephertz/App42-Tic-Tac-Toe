@@ -27,7 +27,7 @@ public class FacebookService {
 	private SharedPreferences mPrefs;    
 	private Context appContext = null;
     private static FacebookService _instance = null;
-    private final String TicTacToePref="App42TicTacToePreferences";
+ 
     
     public static FacebookService instance(){
     	if(_instance == null){
@@ -73,7 +73,7 @@ public class FacebookService {
      * Used to get information of face-book user if saved
      */
     private void refreshFromContext(){
-    	mPrefs = appContext.getSharedPreferences(TicTacToePref, android.content.Context.MODE_PRIVATE);
+    	mPrefs = appContext.getSharedPreferences(Constants.TicTacToePref, android.content.Context.MODE_PRIVATE);
         /*
          * Get existing access_token if any
          */
@@ -117,7 +117,7 @@ public class FacebookService {
             public void onComplete(Bundle values) {
             	System.out.println("authorize on complete");
             	if(mPrefs == null){
-            		mPrefs = appContext.getSharedPreferences(TicTacToePref, android.content.Context.MODE_PRIVATE);
+            		mPrefs = appContext.getSharedPreferences(Constants.TicTacToePref, android.content.Context.MODE_PRIVATE);
             	}
                 SharedPreferences.Editor editor = mPrefs.edit();
                 UserContext.accessToken= facebook.getAccessToken();
