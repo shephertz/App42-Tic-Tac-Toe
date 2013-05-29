@@ -228,7 +228,7 @@ __Update Game:__ While playing game , you have to use our Storage Service API to
 __Push message:__ You have to use our PushNotification Service API in following scenarios.
 
  Whenever a game is created with friend or APP42 user you have to send notification to opponent.
- When Game is running, once you have played you have to send Push Notification to your opponent that now its his turn.
+ When Game is running, once you have played your turn you have to send Push Notification to your opponent that now its his turn.
  
  Push message has been sent in AsyncApp42ServiceApi.java
 
