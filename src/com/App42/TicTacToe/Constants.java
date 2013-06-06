@@ -5,8 +5,8 @@ package com.App42.TicTacToe;
  */
 public class Constants {
 
-	public static final String App42ApiKey = "877bfeffba7b7c4beb3b6b751a29e3567f36753f5d9060393a1d41eed35d7259";
-	public static final String App42ApiSecret = "56fe9028f88f84c71faf7b93b35d1c516f5921e854a926696cfa9033c2bab636";
+	public static final String App42ApiKey = "<Your Api Key>";
+	public static final String App42ApiSecret = "<Your Secret Key>";
 	public static final String FB_APP_ID = "146820035504808";
 
 	public static final String SharedPrefUname = "logged_in_username";
