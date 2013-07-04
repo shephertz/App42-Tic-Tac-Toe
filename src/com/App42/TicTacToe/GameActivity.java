@@ -25,7 +25,7 @@ public class GameActivity extends Activity implements
 		AsyncApp42ServiceApi.App42ServiceListener {
 
 	private JSONObject gameObject;
-	private int selectedCell = Constants.INVALID_SELECTION;
+	private int selectedCell = Constants.InvalidSelection;
 	private String localUserName;
 	private String remoteUserName;
 	private int localUserCellImageId;
@@ -134,9 +134,9 @@ public class GameActivity extends Activity implements
 	 * This function validate user whether from face-book or App42
 	 */
 	private void checkAndUpdateUserNAme(String u1Name,String u2Name){
-		if(u1Name.equals(UserContext.MyUserName)||
-				u2Name.equals(UserContext.MyUserName)){
-			localUserName=UserContext.MyUserName;
+		if(u1Name.equals(UserContext.myUserName)||
+				u2Name.equals(UserContext.myUserName)){
+			localUserName=UserContext.myUserName;
 		}
 	}
 	

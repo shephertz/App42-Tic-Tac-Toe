@@ -72,12 +72,12 @@ public class FriendList extends Activity implements OnItemClickListener {
 				FacebookService.instance().fetchFacebookProfile(this);
 			} else {
 				UserContext.authorized = true;
-				((TextView)findViewById(R.id.my_name)).setText(UserContext.MyDisplayName);
+				((TextView)findViewById(R.id.my_name)).setText(UserContext.myDisplayName);
 				ImageView myimage=(ImageView)findViewById(R.id.my_pic);
-				Utilities.loadImageFromUrl(myimage, UserContext.MyPicUrl);
-				asyncService.registerForPushNotification(this, UserContext.MyUserName);
+				Utilities.loadImageFromUrl(myimage, UserContext.myPicUrl);
+				asyncService.registerForPushNotification(this, UserContext.myUserName);
 				asyncService.loadAllFriends(
-						UserContext.MyUserName, UserContext.accessToken, this);
+						UserContext.myUserName, UserContext.accessToken, this);
 			}
 		}
 
@@ -139,12 +139,12 @@ public class FriendList extends Activity implements OnItemClickListener {
 	 void onFacebookProfileRetreived(boolean isSuccess) {
 			if (isSuccess) {
 				
-				((TextView)findViewById(R.id.my_name)).setText(UserContext.MyDisplayName);
+				((TextView)findViewById(R.id.my_name)).setText(UserContext.myDisplayName);
 				ImageView myimage=(ImageView)findViewById(R.id.my_pic);
-				Utilities.loadImageFromUrl(myimage, UserContext.MyPicUrl);
-				asyncService.registerForPushNotification(this, UserContext.MyUserName);
+				Utilities.loadImageFromUrl(myimage, UserContext.myPicUrl);
+				asyncService.registerForPushNotification(this, UserContext.myUserName);
 				asyncService.loadAllFriends(
-						UserContext.MyUserName, UserContext.accessToken, this);
+						UserContext.myUserName, UserContext.accessToken, this);
 				
 			}
 			else{

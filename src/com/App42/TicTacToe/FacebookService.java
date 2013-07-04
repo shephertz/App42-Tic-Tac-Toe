@@ -22,7 +22,7 @@ import com.facebook.android.FacebookError;
 public class FacebookService {
     	
 	private Handler mUIThreadHandler = null;
-	private Facebook facebook = new Facebook(Constants.FB_APP_ID);
+	private Facebook facebook = new Facebook(Constants.FbAppId);
 	public static AsyncFacebookRunner mAsyncRunner;
 	private SharedPreferences mPrefs;    
 	private Context appContext = null;
@@ -88,13 +88,13 @@ public class FacebookService {
             facebook.setAccessExpires(expires);
         }   
         if(facebook.isSessionValid()){
-        	UserContext.MyDisplayName = mPrefs.getString("display_name", "");
-        	UserContext.MyUserName = mPrefs.getString("warp_join_id", "");
-        	UserContext.MyPicUrl = mPrefs.getString("profile_url", "");
+        	UserContext.myDisplayName = mPrefs.getString("display_name", "");
+        	UserContext.myUserName = mPrefs.getString("warp_join_id", "");
+        	UserContext.myPicUrl = mPrefs.getString("profile_url", "");
         }else{
-        	UserContext.MyDisplayName = "";
-        	UserContext.MyUserName = "";
-        	UserContext.MyPicUrl = "";
+        	UserContext.myDisplayName = "";
+        	UserContext.myUserName = "";
+        	UserContext.myPicUrl = "";
         }
     }
     
@@ -172,14 +172,14 @@ public class FacebookService {
 	            JSONObject picObj = jsonObject.getJSONObject("picture");
 	            JSONObject dataObj = picObj.getJSONObject("data");
 	            
-	            UserContext.MyDisplayName = jsonObject.getString("name");
-	            UserContext.MyUserName = jsonObject.getString("id");
-	            UserContext.MyPicUrl = dataObj.getString("url");
+	            UserContext.myDisplayName = jsonObject.getString("name");
+	            UserContext.myUserName = jsonObject.getString("id");
+	            UserContext.myPicUrl = dataObj.getString("url");
 	            
                 SharedPreferences.Editor editor = mPrefs.edit();
-                editor.putString("display_name", UserContext.MyDisplayName);
-                editor.putString("warp_join_id", UserContext.MyUserName);
-                editor.putString("profile_url", UserContext.MyPicUrl);
+                editor.putString("display_name", UserContext.myDisplayName);
+                editor.putString("warp_join_id", UserContext.myUserName);
+                editor.putString("profile_url", UserContext.myPicUrl);
                 editor.commit();
                 
 	            mUIThreadHandler.post(new Runnable() {

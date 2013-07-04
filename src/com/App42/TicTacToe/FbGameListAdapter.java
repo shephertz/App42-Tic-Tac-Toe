@@ -29,7 +29,7 @@ public class FbGameListAdapter extends BaseAdapter implements
 		this.asyncService = AsyncApp42ServiceApi.instance();
 		this.context = context;
 		gamesList = new ArrayList<JSONObject>();
-		this.asyncService.getUserGamesList(UserContext.MyUserName, this);
+		this.asyncService.getUserGamesList(UserContext.myUserName, this);
 	}
 
 
@@ -70,7 +70,7 @@ public class FbGameListAdapter extends BaseAdapter implements
 				winner = item.getString(Constants.GameWinnerKey);
 				nextTurn = item.getString(Constants.GameNextMoveKey);
 				state = item.getString(Constants.GameStateKey);
-				if(u1Name.equals(UserContext.MyDisplayName)){
+				if(u1Name.equals(UserContext.myDisplayName)){
 					picUrl=item.getString(Constants.GameFriendPicUrl);
 				}
 				else{
@@ -90,7 +90,7 @@ public class FbGameListAdapter extends BaseAdapter implements
 					.findViewById(R.id.friend_name);
 			if (state.equals(Constants.GameStateFinished)) {
 				if (!winner.isEmpty()) {
-					if (winner.equals(UserContext.MyUserName)) {
+					if (winner.equals(UserContext.myUserName)) {
 						tvState.setText("You won!");
 					} else {
 						tvState.setText("You lost :(");
@@ -98,10 +98,10 @@ public class FbGameListAdapter extends BaseAdapter implements
 				} else {
 					tvState.setText("match drawn");
 				}
-			} else if (nextTurn.equalsIgnoreCase(UserContext.MyUserName)) {
+			} else if (nextTurn.equalsIgnoreCase(UserContext.myUserName)) {
 				tvState.setText("your turn");
 			} else {
-				if (u1Name.equalsIgnoreCase(UserContext.MyDisplayName)) {
+				if (u1Name.equalsIgnoreCase(UserContext.myDisplayName)) {
 					tvState.setText(u2Name + "'s turn");
 				} else {
 					tvState.setText(u1Name + "'s turn");
@@ -145,7 +145,7 @@ public class FbGameListAdapter extends BaseAdapter implements
 	}
 
 	public void refreshNewUserList() {
-		this.asyncService.getUserGamesList(UserContext.MyUserName, this);
+		this.asyncService.getUserGamesList(UserContext.myUserName, this);
 	}
 
 

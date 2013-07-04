@@ -42,7 +42,7 @@ public class SplashActivity extends Activity {
 						MainActivity.class);
 				SplashActivity.this.startActivity(mainIntent);
 			}
-		}, Constants.SPLASH_DISPLAY_TIME);
+		}, Constants.SplashDisplayTime);
 
 	}
 /*

@@ -32,9 +32,9 @@ public class FbFriendGameList extends ListActivity {
 		setContentView(R.layout.fb_game_home);
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		((TextView)findViewById(R.id.my_name)).setText(UserContext.MyDisplayName);
+		((TextView)findViewById(R.id.my_name)).setText(UserContext.myDisplayName);
 		ImageView myimage=(ImageView)findViewById(R.id.my_pic);
-		Utilities.loadImageFromUrl(myimage, UserContext.MyPicUrl);
+		Utilities.loadImageFromUrl(myimage, UserContext.myPicUrl);
 		adapter = new FbGameListAdapter(this);
 		this.setListAdapter(adapter);
 	}
@@ -72,7 +72,7 @@ public class FbFriendGameList extends ListActivity {
 		GCMIntentService.isFromNotification=false;
 		Intent myIntent = new Intent(this, GameActivity.class);
 		myIntent.putExtra(Constants.IntentGameObject, game.toString());
-		myIntent.putExtra(Constants.IntentUserName, UserContext.MyUserName);
+		myIntent.putExtra(Constants.IntentUserName, UserContext.myUserName);
 		this.startActivity(myIntent);
 	}
 }

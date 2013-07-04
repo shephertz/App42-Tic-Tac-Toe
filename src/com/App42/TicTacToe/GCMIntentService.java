@@ -14,7 +14,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static boolean isFromNotification=false;
 	public static String notificationMessage="";
 	public GCMIntentService() {
-		super(Constants.SenderId);
+		super(Constants.ProjectNo);
 	}
 
 	@Override

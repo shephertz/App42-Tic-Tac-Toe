@@ -42,7 +42,7 @@ public class Utilities {
 	 * This function allows user to check  authentication with face-book
 	 */
 	public static boolean isAuthenticated() {
-		return (FacebookService.instance().isFacebookSessionValid() && UserContext.MyUserName
+		return (FacebookService.instance().isFacebookSessionValid() && UserContext.myUserName
 				.length() > 0);
 	}
 	/*

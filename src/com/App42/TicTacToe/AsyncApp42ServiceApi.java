@@ -131,7 +131,7 @@ public class AsyncApp42ServiceApi {
 		GCMRegistrar.checkManifest(context);
 		final String deviceId = GCMRegistrar.getRegistrationId(context);
 		if (deviceId.equals("")) {
-			GCMRegistrar.register(context, Constants.SenderId);
+			GCMRegistrar.register(context, Constants.ProjectNo);
 		} else {
 			final Handler callerThreadHandler = new Handler();
 			new Thread() {
@@ -142,7 +142,7 @@ public class AsyncApp42ServiceApi {
 								Constants.App42ApiKey,
 								Constants.App42ApiSecret);
 						String userName = Constants.GameName+ userID;
-						pushService.storeDeviceToken(userName, deviceId);
+					  pushService.storeDeviceToken(userName, deviceId);
 						callerThreadHandler.post(new Runnable() {
 							@Override
 							public void run() {
@@ -233,13 +233,13 @@ public class AsyncApp42ServiceApi {
 			public void run() {
 				try {
 					final JSONObject gameObject = new JSONObject();
-					gameObject.put(Constants.GameFirstUserKey, UserContext.MyUserName);
+					gameObject.put(Constants.GameFirstUserKey, UserContext.myUserName);
 					gameObject.put(Constants.GameSecondUserKey, friendId);
 					
-					gameObject.put(Constants.GameFbName, UserContext.MyDisplayName);
+					gameObject.put(Constants.GameFbName, UserContext.myDisplayName);
 					gameObject.put(Constants.GameFbFriendName, friendName);
 					
-					gameObject.put(Constants.GameMyPicUrl, UserContext.MyPicUrl);
+					gameObject.put(Constants.GameMyPicUrl, UserContext.myPicUrl);
 					gameObject.put(Constants.GameFriendPicUrl, frindPicUrl);
 					
 					gameObject.put(Constants.GameStateKey,
@@ -253,7 +253,7 @@ public class AsyncApp42ServiceApi {
 						storageService.insertJSONDocument(
 								Constants.App42DBName,
 								Constants.App42UserGamesCollectionPrefix
-										+ UserContext.MyUserName, gameObject.toString());
+										+ UserContext.myUserName, gameObject.toString());
 						storageService
 								.insertJSONDocument(
 										Constants.App42DBName,
