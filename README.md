@@ -1,6 +1,10 @@
 App42-Tic-Tac-Toe
 ===========================
 
+![App42 Cloud](http://api.shephertz.com/images/logo.png)
+
+[**App42 Cloud API website**](http://api.shephertz.com)
+
 # About Game
 
 1. It’s a multi-player turn based game.
