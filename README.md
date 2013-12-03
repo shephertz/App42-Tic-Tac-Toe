@@ -21,7 +21,7 @@ Here are the few easy steps to run this sample app.
 2. Create an app once you are on Quick start page after registration.
 3. If you are already registered, login to [AppHQ] (http://apphq.shephertz.com) console and create an app from App Manager Tab.
 4. [To use Push Notification see video] (http://www.youtube.com/watch?feature=player_embedded&v=4FtpoRkPuPo).
-5. To use push Notification service in your application go to https://code.google.com/apis/console,create a new project here.
+5. To use PushNotification service in your application open this [link] (https://code.google.com/apis/console/b/0/?noredirect&pli=1) and create a new project here.
 6. Click on services option in Google console and enable Google Cloud Messaging for Android service.
 7. Click on API Access tab and create a new server key for your application with blank server information.
 8. Go to AppHQ console and click on Push Notification and select Android setting in Settings option.
